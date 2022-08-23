@@ -7,10 +7,12 @@ from tkinter import *
 import datetime
 import tkinter.tix
 
+# Diego Fantino
+# since 31. December 2021
+# Hide a file in another with a key or simply decrypt and encrypt a file with this program
 
-# Code, um eine Datei in einer anderen Datei zu verstecken
 
-
+# hides a file in another and saves the key
 def getkey(filename, keyname, newfile):
     original = open(filename, "rb").read()
     encrypted = open(newfile, "rb").read()
@@ -29,9 +31,7 @@ def getkey(filename, keyname, newfile):
         key_out.write(key)
 
 
-# Code, um eine Datei zu verschlüsseln
-
-
+# encrypts a File
 def encrypt(filename, keyname, newfile):
     to_encrypt = open(filename, "rb").read()
     size = len(to_encrypt)
@@ -43,9 +43,7 @@ def encrypt(filename, keyname, newfile):
         encrypted_out.write(encrypted)
 
 
-# Code, um eine Datei zu entschlüsseln
-
-
+# decrypts a file
 def decrypt(filename, keyname, newfile):
     encrypted = open(filename, "rb").read()
     key = open(keyname, "rb").read()
@@ -54,9 +52,7 @@ def decrypt(filename, keyname, newfile):
         decrypted_out.write(decrypted)
 
 
-# Erstelle Fenster
-
-
+# creates the mainframe
 window = tkinter.Tk()
 window.title("Decryptinator")
 app_width = 800
@@ -71,7 +67,8 @@ window.rowconfigure(0, weight=1)
 window.columnconfigure(0, weight=1)
 
 
-def check_but2_command(but2, path1, path2, path3):
+# checks what a button has to do, when pressed
+def check_button_command(but2, path1, path2, path3):
     if but2 == 1:
         if path.isfile(path1):
             if path.isfile(path2 + ".key"):
@@ -163,6 +160,7 @@ def check_but2_command(but2, path1, path2, path3):
             ms.showerror("Error", "Die zu entschlüsselnde Datei existiert nicht!")
 
 
+# shows a new frame
 def show_frame(oldframe, newframe):
     oldframe.grid_forget()
     newframe.grid(row=0, column=0, sticky='nsew')
@@ -225,13 +223,12 @@ class LastFrame(BasicFrame):
         self.button1 = Button(self, text="zurück", command=lambda: show_frame(self, self.but1), bg=self.thirdcolor)
         self.button1.place(x=240, y=280, width=120, height=40)
         self.button2 = Button(self, text=text4,
-                              command=lambda: check_but2_command(self.but2, self.entry1.get(), self.entry2.get(),
-                                                                 self.entry3.get()), bg=self.thirdcolor)
+                              command=lambda: check_button_command(self.but2, self.entry1.get(), self.entry2.get(),
+                                                                   self.entry3.get()), bg=self.thirdcolor)
         self.button2.place(x=440, y=280, width=120, height=40)
 
 
-# Erstelle Frames
-
+# creates all frames
 framemain = FirstFrame(window, "Decryptinator", "Datein in anderer Datei verstecken/herauslesen",
                        "Datei verschlüsseln/entschlüsseln")
 framemiddle1 = MiddleFrame(window, "Datei in anderer Datei verstecken/herauslesen", "Datei in anderer Datei verstecken",
